@@ -196,37 +196,37 @@ telephony-service
    no auto-reg-ephone
    max-ephones 5
    max-dn 20
-   ip source-address 10.__.100.8 port 2000
+   ip source-address 10.31.100.8 port 2000
    create cnf-files
 ephone-dn 1
-  number __11
+  number 3111
 ephone-dn 2
-  number __22
+  number 3122
 ephone-dn 3
-  number __33
+  number 3133
 ephone-dn 4
-  number __44
+  number 3144
 ephone-dn 5
-  number __55
+  number 3155
 ephone-dn 6
-  number __66
+  number 3166
 ephone-dn 7
-  number __77
+  number 3177
 ephone-dn 8
-  number __88
+  number 3188
  ephone-dn 9
-   number__90
+   number 3122
 ephone-dn 10
- number __91
+ number 3127
 Ephone 1
-  Mac-address ____.____.____
+  Mac-address 6cfa.8972.f0a9
   type 8945
-  button 1:8 2:7 3:6 4:5
+  button 1:1 2:2 3:3 4:9
   restart
 Ephone 2
-  Mac-address ____.____.____
+  Mac-address 8478.aced.5847
   type 8945
-  button 1:4 2:3 3:2 4:1
+  button 1:4 2:5 3:6 4:10
   restart  
 end
 
@@ -257,9 +257,13 @@ configure terminal
  destination-pattern 11..
  session target ipv4:10.11.100.8
  codec g711ULAW
- ! dial-peer voice 12 Voip
- ! destination-pattern 12..
- ! session target ipv4:10.12.100.8
+ dial-peer voice 12 Voip
+ destination-pattern 12..
+ session target ipv4:10.12.100.8
+ codec g711ULAW
+ ! dial-peer voice 31 Voip
+ ! destination-pattern 31..
+ ! session target ipv4:10.31.100.8
  ! codec g711ULAW
 dial-peer voice 21 Voip
  destination-pattern 21..
@@ -321,7 +325,7 @@ dial-peer voice 82 Voip
 @@@@@@
 !@@@EDGE ROUTE CONFIG
 config t
-   hostname EDGE-_
+   hostname EDGE-31
    enable secret pass
    service password-encryption
    no logging console
@@ -336,15 +340,15 @@ config t
       exec-timeout 0 0
    Int Gi 0/0/0
      description INSIDE
-     ip add 10.m.m.1 255.255.255.0
+     ip add 10.31.31.1 255.255.255.0
 	 no shutdown
    Int Gi 0/0/1
      description OUTSIDE
-	 ip add 200.0.0.m 255.255.255.0
+	 ip add 200.0.0.31 255.255.255.0
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP
-	 ip add m.0.0.1 255.255.255.255
+	 ip add 31.0.0.1 255.255.255.255
  end
 
  !!!STATIC ROUTING FOR MININUM WAGERS: 645php/day
@@ -352,7 +356,7 @@ config t
 conf t
  ip routing 
  ip route 10.11.0.0 255.255.0.0 200.0.0.11
-! ip route 10.12.0.0 255.255.0.0 200.0.0.12
+ ip route 10.12.0.0 255.255.0.0 200.0.0.12
  ip route 10.21.0.0 255.255.0.0 200.0.0.21
  ip route 10.22.0.0 255.255.0.0 200.0.0.22
  ip route 10.31.0.0 255.255.0.0 200.0.0.31
@@ -367,7 +371,7 @@ conf t
  ip route 10.72.0.0 255.255.0.0 200.0.0.72
  ip route 10.81.0.0 255.255.0.0 200.0.0.81
  ip route 10.82.0.0 255.255.0.0 200.0.0.82
- ip route 10._.0.0 255.255.0.0 10._._.4
+ ip route 10.31.0.0 255.255.0.0 10.31.31.4
  end
  
 *********************************************
@@ -376,14 +380,14 @@ Layer three/3 switch ROUTING = 300k up!!!
 !SI SWITCH ASA/DIKIT KAY EDGE PARA MAKALABAS
 conf t 
 ip routing
-ip route 0.0.0.0 0.0.0.0 10._._.1
+ip route 0.0.0.0 0.0.0.0 10.31.31.1
 end
 
 @CUCM:DEFAULT ROUTING( 0.0.0.0 0.0.0.0) FOR CUCM:
 !SI CUCM ASA/DIKIT KAY SWITCH VLAN 100 PARA MAKALABAS
 conf t
 ip routing
-ip route 0.0.0.0 0.0.0.0 10._.100.4
+ip route 0.0.0.0 0.0.0.0 10.31.100.4
 end
 
 !How to Static Route windows Server:
