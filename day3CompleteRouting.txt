@@ -191,7 +191,7 @@ router-id 4.4.4.4
 network 4.4.4.4 0.0.0.0 area 0
 network 10.1.1.8 0.0.0.3 area 0
 interface e1/2
-  ! ip ospf network point-to-point
+   ip ospf network point-to-point
    !eto lab sa exam sa 2024/2025
 end
 R3:
@@ -204,7 +204,7 @@ network 3.3.3.3 0.0.0.0 area 0
 network 10.1.1.4 0.0.0.3 area 0
 network 10.1.1.8 0.0.0.3 area 0
 interface e1/2
-  ! ip ospf network point-to-point
+   ip ospf network point-to-point
 end
 R2:
 config t
@@ -216,7 +216,7 @@ network 2.2.2.2 0.0.0.0 area 0
 network 10.1.1.4 0.0.0.3 area 0
 network 10.1.1.0 0.0.0.3 area 0
 interface e1/2
-   ! ip ospf priority 255
+   ip ospf priority 255
   !! eto mismo ang Lab mo:
 end
 R1:
@@ -228,7 +228,7 @@ router-id 1.1.1.1
 network 1.1.1.1 0.0.0.0 area 0
 network 10.1.1.0 0.0.0.3 area 0
 interface e1/0
-  ! ip ospf priority 0
+ip ospf priority 0
 end
 
 OSPF checking:
