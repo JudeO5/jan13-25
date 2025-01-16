@@ -636,19 +636,26 @@ IPSEC VPN SITE TO SITE:
 linBld2:
 sudo su
 ifconfig eth0 10.10.10.100 netmask 255.255.255.0 up
-route add default gw 10.10.10.11
+route add default gw 10.10.10.1
 ping 10.10.10.11
 
 linBld3:
 sudo su
 ifconfig eth0 10.20.20.100 netmask 255.255.255.0 up
-route add default gw 10.20.20.12
+route add default gw 10.20.20.1
 ping 10.20.20.12
-@r2-fwvPN:
+
+@FWPH:
 CONFIG T
 int gi 3
- ip add 10.20.20.12 255.255.255.0
+ ip add 10.10.10.1 255.255.255.0
 end
+@FWJP:
+CONFIG T
+int gi 3
+ ip add 10.20.20.1 255.255.255.0
+end
+
 
 TASK10: DO YOU HAVE TO REPLACED BY A.I AT WORK? REPLACED BY
 YOUNGER, SMARTER, CHEAPER NEW HIRES?? HOW TO BE UNTOUCHABLE EMPLOYEE?
